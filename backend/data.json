@@ -1,0 +1,23 @@
+[
+    {  "nom": "maram", "mail": "maram@test", "age": 20, "password": "Maram123!", "genre": "femme", "interets": ["musique"] },
+    {  "nom": "amina", "mail": "amina@test", "age": 22, "password": "Amina2024$", "genre": "femme", "interets": ["lecture"] },
+    {  "nom": "assia", "mail": "assia@test", "age": 25, "password": "Assia@321", "genre": "femme", "interets": ["sport"] },
+    {  "nom": "yassine", "mail": "yassine@test", "age": 30, "password": "Yassine!456", "genre": "homme", "interets": ["sport"] },
+    {  "nom": "mehdi", "mail": "mehdi@test", "age": 28, "password": "Mehdi$789", "genre": "homme", "interets": ["cinéma"] },
+    {  "nom": "ines", "mail": "ines@test", "age": 21, "password": "Ines1234", "genre": "femme", "interets": ["voyage"] },
+    {  "nom": "adam", "mail": "adam@test", "age": 24, "password": "Adam@2023", "genre": "homme", "interets": ["jeux vidéo"] },
+    {  "nom": "nour", "mail": "nour@test", "age": 26, "password": "Nour#pass", "genre": "femme", "interets": ["cuisine"] },
+    {  "nom": "salim", "mail": "salim@test", "age": 29, "password": "Salim_001", "genre": "homme", "interets": ["musique"] },
+    {  "nom": "hana", "mail": "hana@test", "age": 23, "password": "Hana.PWD23", "genre": "femme", "interets": ["mode"] },
+    {  "nom": "karim", "mail": "karim@test", "age": 31, "password": "KarimXYZ!", "genre": "homme", "interets": ["lecture"] },
+    {  "nom": "sara", "mail": "sara@test", "age": 20, "password": "Sara%2024", "genre": "femme", "interets": ["sport"] },
+    {  "nom": "khalil", "mail": "khalil@test", "age": 27, "password": "Khalil*pass", "genre": "homme", "interets": ["voyage"] },
+    {  "nom": "lina", "mail": "lina@test", "age": 22, "password": "Lina@@123", "genre": "femme", "interets": ["musique"] },
+    {  "nom": "tarek", "mail": "tarek@test", "age": 25, "password": "Tarek_321", "genre": "homme", "interets": ["jeux vidéo"] },
+    {  "nom": "rim", "mail": "rim@test", "age": 24, "password": "Rim2025!", "genre": "femme", "interets": ["lecture"] },
+    {  "nom": "nadir", "mail": "nadir@test", "age": 30, "password": "Nadir&test", "genre": "homme", "interets": ["cinéma"] },
+    {  "nom": "selma", "mail": "selma@test", "age": 21, "password": "Selma123$", "genre": "femme", "interets": ["voyage"] },
+    {  "nom": "aziz", "mail": "aziz@test", "age": 29, "password": "AzizPass!", "genre": "homme", "interets": ["sport"] },
+    {  "nom": "nadia", "mail": "nadia@test", "age": 26, "password": "NadiaTest2024", "genre": "femme", "interets": ["cuisine"] }
+  ]
+  
