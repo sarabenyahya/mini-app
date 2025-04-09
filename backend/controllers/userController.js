@@ -1,5 +1,7 @@
 const UserService = require('../services/UserService');
 const mongoose = require('mongoose');
+const UserModel = require('../models/User');
+
 
 class UserController {
     static async login(req, res) {
@@ -16,26 +18,22 @@ class UserController {
                 return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
             }
             
-            // Set session
+            // stocker l'utilisateur dans la session
             req.session.user = {
                 id: user._id,
                 email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 isAdmin: user.isAdmin
-            };
+              };
             
-            res.json({ 
+              return res.json({
                 message: 'Connexion réussie',
-                user: {
-                    id: user._id,
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    isAdmin: user.isAdmin
-                }
-            });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
+                user: req.session.user
+              });
+            } catch (error) {
+                return res.status(500).json({ message: 'Erreur serveur', error: error.message });
+            }
     }
 
     static async logout(req, res) {
@@ -58,6 +56,7 @@ class UserController {
     }
 
     static async getUserById(req, res) {
+
         const id = req.params.id;
         
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -153,9 +152,19 @@ class UserController {
     }
 
     static async checkSession(req, res) {
-        
-        if (req.session.user) {
+        if (!req.session.user) {
+            console.log("Aucune session trouvée, utilisateur non connecté.");
+            return res.json({ authenticated: false });
+        }
+    
+        try {
+            console.log("Utilisateur connecté :", req.session.user);
+    
             const user = await UserService.getUserById(req.session.user.id);
+            if (!user) {
+                return res.status(404).json({ authenticated: false, message: "Utilisateur non trouvé" });
+            }
+    
             return res.json({
                 authenticated: true,
                 user: {
@@ -166,9 +175,12 @@ class UserController {
                     isAdmin: user.isAdmin
                 }
             });
+        } catch (error) {
+            console.error('Erreur checkSession:', error.message);
+            return res.status(500).json({ authenticated: false, message: "Erreur serveur", error: error.message });
         }
-        res.json({ authenticated: false });
     }
+    
 }
 
 module.exports = UserController;

@@ -9,12 +9,13 @@ router.post('/login', UserController.login);
 router.post('/logout', UserController.logout);
 
 // Protected routes - Admin only
+router.get('/check-session', UserController.checkSession);
+
 router.get('/', isAuthenticated, UserController.getAllUsers);
 router.get('/:id', isAuthenticated, UserController.getUserById);
 router.post('/', isAuthenticated, isAdmin, UserController.addUser);
 router.put('/:id', isAuthenticated, isAdmin, UserController.updateUser);
 router.delete('/:id', isAuthenticated, isAdmin, UserController.deleteUser);
-router.get('/check-session', UserController.checkSession);
 
 router.post('/addSuperUser', async (req, res) => {
     try {

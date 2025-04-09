@@ -37,19 +37,26 @@ const router = createRouter({
       name: 'loginForm',
       component: LoginFormView,
     },
+
   ],
 })
 
-// Global navigation guard
-router.beforeEach((to, from, next) => {
+
+/* router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
 
-  // If the route requires authentication and the user is not authenticated
-  if (to.meta.requiresAuth && !userStore.isAuthenticated) {
-    next('/users/login') // Redirect to login page
-  } else {
-    next() // Allow access to the route
+  // Vérification de l'authentification au chargement de la page
+  if (!userStore.isAuthenticated) {
+    await userStore.checkAuth();  // Vérifie si l'utilisateur est authentifié
   }
-})
+
+  // Si la route nécessite l'authentification et que l'utilisateur n'est pas authentifié
+  if (to.meta.requiresAuth && !userStore.isAuthenticated) {
+    next('/users/login')  // Redirection vers la page de connexion
+  } else {
+    next()  // Accès autorisé à la route
+  }
+
+}) */
 
 export default router

@@ -52,9 +52,7 @@ export default {
       try {
         const { email, password } = data;
         await this.login(email, password);
-        this.$router.push({ name: 'users' })
-
-        // Redirection après la connexion réussie
+        this.$router.push({ name: 'users' }) // Redirection après la connexion réussie
       } catch (error) {
 
         this.errorMessage = error.message || 'Une erreur est survenue. Veuillez vérifier vos informations.'

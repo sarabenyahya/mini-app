@@ -1,22 +1,20 @@
 <template>
   <div class="form-view-container">
-    <h2 class="page-title">
-      {{ isEditMode ? 'Modifier un employé' : 'Ajouter un employé' }}
-    </h2>
-    <Form :fields="fieldList" :buttonText="isEditMode ? 'Mettre à jour' : 'Ajouter'" :initialValues="employeeData"
+    <h2 class="page-title">Ajouter un utilisateur</h2>
+    <FormUser :fields="fieldList" :buttonText="'créér un utilisateur'" :initialValues="UserData"
       @onSubmit="handleSubmit" />
   </div>
 </template>
 
 <script>
-import { useEmployeeStore } from '../stores/employeeStore';
-import Form from '../components/Form.vue';
-import { mapActions, mapState } from 'pinia';
+import { useUserStore } from '@/stores/userStore';
+import { mapActions } from 'pinia';
+import FormUser from '@/components/FormUser.vue';
 
 export default {
   components: {
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Form,
+
+    FormUser,
   },
   props: {
     id: {
@@ -29,23 +27,24 @@ export default {
     return {
       fieldList: [
         {
-          name: 'nom',
+          name: 'lastName',
           type: 'text',
           placeholder: 'tapez votre nom',
           label: 'Nom',
         },
         {
-          name: 'mail',
+          name: 'firstName',
+          type: 'text',
+          placeholder: 'tapez votre nom',
+          label: 'Prénom',
+        },
+        {
+          name: 'email',
           type: 'email',
           placeholder: 'tapez votre adresse email',
           label: 'Email',
         },
-        {
-          name: 'age',
-          type: 'number',
-          placeholder: 'tapez votre âge',
-          label: 'Age',
-        },
+
         {
           name: 'password',
           type: 'password',
@@ -55,56 +54,31 @@ export default {
         {
           name: 'genre',
           type: 'radio',
-          label: 'Genre',
+          label: 'isAdmin?',
           options: [
-            { value: 'homme', label: 'Homme' },
-            { value: 'femme', label: 'Femme' },
+            { value: 'oui', label: 'oui' },
+            { value: 'Non', label: 'Non' },
           ],
         },
-        {
-          name: 'interets',
-          type: 'checkbox',
-          label: "Centres d'intérêt",
-          options: [
-            { value: 'musique', label: 'Musique' },
-            { value: 'sport', label: 'Sport' },
-          ],
-        },
+
       ],
-      employeeData: {},
+      UserData: {},
     };
   },
 
-  computed: {
-    ...mapState(useEmployeeStore, ['employees', 'getEmployeeById']),
-    isEditMode() {
-      return !!this.id;
-    },
-  },
 
-  created() {
-    if (this.isEditMode) {
-      const employee = this.getEmployeeById(this.id);
-      if (employee) {
-        this.employeeData = { ...employee };
-      } else {
-        alert('Employé introuvable');
-        this.$router.push('/');
+
+  methods: {
+    ...mapActions(useUserStore, ['createUser']),
+    async handleSubmit(data) {
+      const userStore = useUserStore()
+      try {
+        await userStore.createUser(data)
+        this.$router.push({ name: 'users' })
+      } catch (error) {
+        console.error("Erreur lors de l'ajout de l'utilisateur :", error.message)
       }
     }
-  },
-  methods: {
-    ...mapActions(useEmployeeStore, ['addEmployee', 'editEmployee']),
-
-    handleSubmit(data) {
-      if (this.isEditMode) {
-        this.editEmployee(this.id, data);
-      } else {
-        this.addEmployee(data);
-      }
-
-      this.$router.push({ name: 'tableau' });
-    },
   },
 };
 </script>

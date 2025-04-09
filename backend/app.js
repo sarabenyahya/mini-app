@@ -24,13 +24,12 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'default_secret_key_change_in_production',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI,
-        ttl: 24 * 60 * 60 // 1 day session
-    }),
+    
+    
+    
     cookie: {
         secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        httpOnly: true,
+        
         maxAge: 24 * 60 * 60 * 1000 // 1 day
     }
 }));

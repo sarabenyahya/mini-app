@@ -172,7 +172,7 @@ export const useUserStore = defineStore('User Store', {
 
     async checkAuth() {
       try {
-        const { data } = await userService.checkSession()
+        const data = await userService.checkSession()
         this.isAuthenticated = data.authenticated
         if (data.authenticated && !this.user) {
           this.user = data.user

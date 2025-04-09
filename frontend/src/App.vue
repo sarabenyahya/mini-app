@@ -57,7 +57,6 @@ export default {
         push.error({
           title: 'Error',
           type: 'error',
-          duration: 3000,
           message: 'Failed to logout',
         })
       }
@@ -68,7 +67,10 @@ export default {
     },
   },
   async mounted() {
-    await this.checkAuth();
+    const value = await this.checkAuth();
+    console.log("checkAuth value: ", value);
+
   },
+
 };
 </script>
